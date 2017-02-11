@@ -1,0 +1,28 @@
+.mainUpperArea {
+  display: flex;
+  justify-content: space-between;
+  height: 400px;
+}
+
+.databaseArea {
+  border-style: dashed;
+  border-width: medium;
+  border-color: blue;
+  width: 70%;
+}
+
+.playListArea {
+  border-style: dashed;
+  border-width: medium;
+  border-color: blue;
+  width: 30%;
+}
+
+.playerArea {
+  border-style: dashed;
+  border-width: medium;
+  border-color: blue;
+  width: 100%;
+  height: 150px;
+  display: flex;
+}

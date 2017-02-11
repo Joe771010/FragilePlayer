@@ -1,0 +1,85 @@
+.panel {
+  display: flex;
+}
+
+.slider {
+  width: 50%;
+  height: 10px;
+  margin: 10px;
+}
+
+.controlPanel {
+  width: 20%;
+  border-style: dashed;
+  border-width: thin;
+  border-color: red;
+}
+
+.controlButtons {
+  height: 60%;
+  border-style: dashed;
+  border-width: thin;
+  border-color: red;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.volumeSliderPanel {
+  height: 40%;
+  border-style: dashed;
+  border-width: thin;
+  border-color: red;
+  display: flex;
+  justify-content: center;
+}
+
+.volumeSlider {
+  width: 80%;
+}
+
+.infoPanel {
+  width: 60%;
+  border-style: dashed;
+  border-width: thin;
+  border-color: red;
+}
+
+.songInfo {
+  height: 60%;
+  border-style: dashed;
+  border-width: thin;
+  border-color: red;
+}
+
+.songNamePanel {
+  height: 20%;
+  font-size: 18px;
+  text-align: center;
+  padding-top: 15px;
+}
+
+.songSliderPanel {
+  height: 70%;
+  display: flex;
+  justify-content: center;
+
+}
+
+.songSlider {
+  width: 80%;
+}
+
+.otherInfo {
+  height: 40%;
+  border-style: dashed;
+  border-width: thin;
+  border-color: red;
+}
+
+.youtubeDebug {
+  width: 20%;
+  border-style: dashed;
+  border-width: thin;
+  border-color: red;
+}
