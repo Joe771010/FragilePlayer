@@ -10,14 +10,14 @@
 
 .controlPanel {
   width: 20%;
-  border-style: dashed;
+  border-style: solid;
   border-width: thin;
   border-color: red;
 }
 
 .controlButtons {
   height: 60%;
-  border-style: dashed;
+  border-style: solid;
   border-width: thin;
   border-color: red;
   display: flex;
@@ -27,7 +27,7 @@
 
 .volumeSliderPanel {
   height: 40%;
-  border-style: dashed;
+  border-style: solid;
   border-width: thin;
   border-color: red;
   display: flex;
@@ -40,14 +40,14 @@
 
 .infoPanel {
   width: 60%;
-  border-style: dashed;
+  border-style: solid;
   border-width: thin;
   border-color: red;
 }
 
 .songInfo {
   height: 60%;
-  border-style: dashed;
+  border-style: solid;
   border-width: thin;
   border-color: red;
 }
@@ -57,6 +57,11 @@
   font-size: 18px;
   text-align: center;
   padding-top: 15px;
+}
+
+.songNameText {
+  font-family: Microsoft JhengHei;
+  font-size: 18px;
 }
 
 .songSliderPanel {
@@ -72,14 +77,19 @@
 
 .otherInfo {
   height: 40%;
-  border-style: dashed;
+  border-style: solid;
   border-width: thin;
   border-color: red;
 }
 
+.playModeItemStyle {
+  font-family: Microsoft JhengHei;
+  font-size: 12px;
+}
+
 .youtubeDebug {
   width: 20%;
-  border-style: dashed;
+  border-style: solid;
   border-width: thin;
   border-color: red;
 }

@@ -1,0 +1,54 @@
+/*.tableColumnSelect {
+  width: 10%;
+  border-style: solid;
+  border-width: thin;
+  border-color: green;
+  height: 30px;
+}
+
+.tableColumnSongName {
+  width: 50%;
+  border-style: solid;
+  border-width: thin;
+  border-color: green;
+  height: 30px;
+}
+
+.tableColumnSinger {
+  width: 30%;
+  border-style: solid;
+  border-width: thin;
+  border-color: green;
+  height: 30px;
+}
+
+.tableColumnDelete {
+  width: 10%;
+  border-style: solid;
+  border-width: thin;
+  border-color: green;
+  height: 30px;
+}
+
+.tableRowSelectedStyle {
+  font-family: Microsoft JhengHei;
+  background-color: LemonChiffon;
+}
+
+.tableRowUnselectedStyle {
+  font-family: Microsoft JhengHei;
+}
+
+.tableHeaderStyle {
+  font-family: Microsoft JhengHei;
+  height: 30px;
+}
+
+.tableHeaderRowStyle {
+  height: 30px;
+}
+
+.selectIcon {
+  width: 20px;
+  height: 20px;
+}*/

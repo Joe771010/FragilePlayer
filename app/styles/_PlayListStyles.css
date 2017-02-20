@@ -1,0 +1,31 @@
+/*.title {
+  font-family: Microsoft JhengHei;
+  font-size: 20px;
+  text-align: center;
+  margin: 5px;
+}
+
+.tableRowStyle {
+  font-family: Microsoft JhengHei;
+}
+
+.tableColumnPlay {
+  width: 15%;
+  border-style: solid;
+  border-width: thin;
+  border-color: green;
+}
+
+.tableColumnSongName {
+  width: 70%;
+  border-style: solid;
+  border-width: thin;
+  border-color: green;
+}
+
+.tableColumnRemove {
+  width: 15%;
+  border-style: solid;
+  border-width: thin;
+  border-color: green;
+}*/

@@ -2,27 +2,28 @@
   display: flex;
   justify-content: space-between;
   height: 400px;
+  width: 1000px;
 }
 
 .databaseArea {
-  border-style: dashed;
-  border-width: medium;
+  border-style: solid;
+  border-width: thin;
   border-color: blue;
   width: 70%;
 }
 
 .playListArea {
-  border-style: dashed;
-  border-width: medium;
+  border-style: solid;
+  border-width: thin;
   border-color: blue;
   width: 30%;
 }
 
 .playerArea {
-  border-style: dashed;
-  border-width: medium;
+  border-style: solid;
+  border-width: thin;
   border-color: blue;
-  width: 100%;
+  width: 1000px;
   height: 150px;
   display: flex;
 }
