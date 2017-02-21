@@ -3,6 +3,7 @@
   justify-content: space-between;
   height: 400px;
   width: 1000px;
+  margin-bottom: 3px;
 }
 
 .databaseArea {
@@ -17,6 +18,7 @@
   border-width: thin;
   border-color: blue;
   width: 30%;
+  margin-left: 3px;
 }
 
 .playerArea {

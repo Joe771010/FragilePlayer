@@ -1,4 +1,13 @@
 const DatabaseStyles = {
+  tableArea: {
+    height: '350px',
+    borderStyle: 'solid',
+    borderWidth: 'thin',
+    borderColor: 'blue',
+  },
+  tableStyle: {
+
+  },
   tableRow: {
     height: '30px'
   },
@@ -7,7 +16,8 @@ const DatabaseStyles = {
     backgroundColor: 'LemonChiffon'
   },
   tableColumnSelect: {
-    width: '10%',
+    // width: '10%',
+    width: '50px',
     borderStyle: 'solid',
     borderWidth: 'thin',
     borderColor: 'green',
@@ -16,27 +26,31 @@ const DatabaseStyles = {
     padding: '0',
   },
   tableColumnSongName: {
-    width: '50%',
+    // width: '50%',
     borderStyle: 'solid',
     borderWidth: 'thin',
     borderColor: 'green',
     fontFamily: 'Microsoft JhengHei',
     fontSize: '13px',
     textAlign: 'center',
-    height: '30px'
+    height: '30px',
+    padding: '0',
   },
   tableColumnSinger: {
-    width: '30%',
+    // width: '30%',
+    width: '100px',
     borderStyle: 'solid',
     borderWidth: 'thin',
     borderColor: 'green',
     fontFamily: 'Microsoft JhengHei',
     fontSize: '13px',
     textAlign: 'center',
-    height: '30px'
+    height: '30px',
+    padding: '0',
   },
   tableColumnDelete: {
-    width: '10%',
+    // width: '10%',
+    width: '50px',
     borderStyle: 'solid',
     borderWidth: 'thin',
     borderColor: 'green',
@@ -44,17 +58,40 @@ const DatabaseStyles = {
     textAlign: 'center',
     padding: '0',
   },
-  icon: {
+  icon10: {
+    width: '10px',
+    height: '10px'
+  },
+  icon15: {
+    width: '15px',
+    height: '15px'
+  },
+  icon20: {
     width: '20px',
     height: '20px'
   },
   addDataTextField: {
-    width: '20%'
+    width: '20%',
+    fontFamily: 'Microsoft JhengHei',
+  },
+  addDataHint: {
+    fontFamily: 'Microsoft JhengHei',
+    fontSize: '10px',
+    color: 'Gray'
   },
   buttonText: {
     fontFamily: 'Microsoft JhengHei',
     fontSize: '14px',
   },
+  buttonStyle: {
+    margin: '3px',
+    // height: '30px'
+  },
+  deleteText: {
+    fontFamily: 'Microsoft JhengHei',
+    fontSize: '14px',
+    marginRight: '10px'
+  }
 }
 
 

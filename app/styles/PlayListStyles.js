@@ -7,7 +7,8 @@ const PlayListStyles = {
     backgroundColor: 'MistyRose'
   },
   tableColumnPlay: {
-    width: '15%',
+    // width: '15%',
+    width: '30px',
     borderStyle: 'solid',
     borderWidth: 'thin',
     borderColor: 'green',
@@ -16,7 +17,7 @@ const PlayListStyles = {
     padding: '0',
   },
   tableColumnSongName: {
-    width: '70%',
+    // width: '70%',
     borderStyle: 'solid',
     borderWidth: 'thin',
     borderColor: 'green',
@@ -25,7 +26,8 @@ const PlayListStyles = {
     height: '30px',
   },
   tableColumnRemove: {
-    width: '15%',
+    // width: '15%',
+    width: '30px',
     borderStyle: 'solid',
     borderWidth: 'thin',
     borderColor: 'green',
@@ -33,11 +35,18 @@ const PlayListStyles = {
     textAlign: 'center',
     padding: '0',
   },
-  icon: {
-    width: '25px',
-    height: '25px',
-    marginTop: '3px'
-  }
+  icon10: {
+    width: '10px',
+    height: '10px'
+  },
+  icon15: {
+    width: '15px',
+    height: '15px'
+  },
+  icon20: {
+    width: '20px',
+    height: '20px'
+  },
 }
 
 module.exports = PlayListStyles

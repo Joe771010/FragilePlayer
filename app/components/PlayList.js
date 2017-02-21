@@ -13,25 +13,25 @@ class PlayList extends React.Component {
     let songsInList = this.props.songsInList;
     return (
       <div className='playListArea'>
-        <Table selectable = {false}>
+        <Table selectable={false} height={'400px'} bodyStyle={{overflow:'visible'}}>
           <TableBody showRowHover={true} displayRowCheckbox={false}>
             {songsInList.map((x, i) => {
               let rowStyle = (this.props.currentSongIndex == i)? PlayListStyles.tableRowCurrent: PlayListStyles.tableRow
               return (
                 <TableRow key={i} style={rowStyle}>
+                  <TableRowColumn style={PlayListStyles.tableColumnSongName}>{x.Name}</TableRowColumn>
                   <TableRowColumn style={PlayListStyles.tableColumnPlay}>
                     <PlayArrow
                       hoverColor='pink'
                       onClick={() => this.props.onPlayClick(i)}
-                      style={PlayListStyles.icon}
+                      style={PlayListStyles.icon15}
                     />
                   </TableRowColumn>
-                  <TableRowColumn style={PlayListStyles.tableColumnSongName}>{x.Name}</TableRowColumn>
                   <TableRowColumn style={PlayListStyles.tableColumnRemove}>
                     <Clear
                       hoverColor='pink'
                       onClick={() => this.props.onRemoveClick(i)}
-                      style={PlayListStyles.icon}
+                      style={PlayListStyles.icon15}
                     />
                   </TableRowColumn>
                 </TableRow>

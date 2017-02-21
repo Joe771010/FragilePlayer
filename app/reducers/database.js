@@ -3,10 +3,15 @@ const initialState = () => {
     songs: [{Name:'', Singer:''}],
     selected: [],
     displayAddDataArea: false,
+    displayDeleteDataDialog: false,
+    rowToDelete: -1,
     addData: {
       videoId: '',
       song: '',
-      singer: ''
+      singer: '',
+      errorTextVideoId: '',
+      errorTextSong: '',
+      errorTextSinger: ''
     }
   }
 }
@@ -14,8 +19,9 @@ const initialState = () => {
 const database = (state = initialState(), action) => {
   switch(action.type) {
     case 'CREATE_DATABASE':
+      let sorted = sortSongs(action.db)
       return Object.assign({}, state, {
-          songs: action.db,
+          songs: sorted,
           selected: zeroArray(action.db.length)
       })
     case 'SET_SELECTED_SONGS':
@@ -24,7 +30,19 @@ const database = (state = initialState(), action) => {
       return Object.assign({}, state, {
           selected: newSelected
       })
-
+    case 'DELETE_DATA':
+      return Object.assign({}, state, {
+          displayDeleteDataDialog: true,
+          rowToDelete: action.row
+      })
+    case 'DELETE_DATA_OK':
+      return Object.assign({}, state, {
+          displayDeleteDataDialog: false
+      })
+    case 'DELETE_DATA_CANCEL':
+      return Object.assign({}, state, {
+          displayDeleteDataDialog: false
+      })
     case 'ADD_SONGS_TO_PLAY_LIST':
       return Object.assign({}, state, {
           selected: zeroArray(state.songs.length)
@@ -34,9 +52,13 @@ const database = (state = initialState(), action) => {
           displayAddDataArea: true
       })
     case 'CHANGE_ADD_DATA_TEXT_VIDEO_ID':
+      let exist = state.songs.find((x) => {
+                    return x.VideoId === action.text
+                  })
       return Object.assign({}, state, {
           addData: Object.assign({}, state.addData, {
-            videoId: action.text
+            videoId: action.text,
+            errorTextVideoId: (exist!=undefined)? '已存在,按下新增後會覆蓋': ''
           })
       })
     case 'CHANGE_ADD_DATA_TEXT_SONG':
@@ -57,7 +79,10 @@ const database = (state = initialState(), action) => {
         addData: {
           videoId: '',
           song: '',
-          singer: ''
+          singer: '',
+          errorTextVideoId: '',
+          errorTextSong: '',
+          errorTextSinger: ''
         }
       })
     case 'CLICK_ADD_DATA_CANCEL':
@@ -66,12 +91,47 @@ const database = (state = initialState(), action) => {
         addData: {
           videoId: '',
           song: '',
-          singer: ''
+          singer: '',
+          errorTextVideoId: '',
+          errorTextSong: '',
+          errorTextSinger: ''
         }
+      })
+    case 'ERROR_INPUT_VIDEO_ID':
+      return Object.assign({}, state, {
+          addData: Object.assign({}, state.addData, {
+            errorTextVideoId: action.text,
+            errorTextSong: '',
+            errorTextSinger: ''
+          })
+      })
+    case 'ERROR_INPUT_SONG':
+      return Object.assign({}, state, {
+          addData: Object.assign({}, state.addData, {
+            errorTextVideoId: '',
+            errorTextSong: action.text,
+            errorTextSinger: ''
+          })
+      })
+    case 'ERROR_INPUT_SINGER':
+      return Object.assign({}, state, {
+          addData: Object.assign({}, state.addData, {
+            errorTextVideoId: '',
+            errorTextSong: '',
+            errorTextSinger: action.text
+          })
       })
     default:
       return state;
   }
+}
+
+const sortSongs = (songs) => {
+  return songs.sort((a, b) => {
+    if(a.Singer < b.Singer) return -1;
+    if(a.Singer > b.Singer) return 1;
+    return 0;
+  })
 }
 
 // allocate an array of size n and value=0

@@ -12,6 +12,25 @@ export const setSelectedSongsAction = (selectedRow) => {
   }
 }
 
+export const onDataDeleteAction = (row) => {
+  return {
+    type: 'DELETE_DATA',
+    row: row
+  }
+}
+
+export const onDataDeleteClickOkAction = () => {
+  return {
+    type: 'DELETE_DATA_OK',
+  }
+}
+
+export const onDataDeleteClickCancelAction = () => {
+  return {
+    type: 'DELETE_DATA_CANCEL',
+  }
+}
+
 export const displayAddDataAreaAction = () => {
   return {
     type: 'DISPLAY_ADD_DATA_AREA'
@@ -39,14 +58,35 @@ export const onAddDataTextSingerChangeAction = (text) => {
   }
 }
 
-export const onAddDataClickActionOk = () => {
+export const onAddDataClickOkAction = () => {
   return {
     type: 'CLICK_ADD_DATA_OK'
   }
 }
 
-export const onAddDataClickActionCancel = () => {
+export const onAddDataClickCancelAction = () => {
   return {
     type: 'CLICK_ADD_DATA_CANCEL'
+  }
+}
+
+export const inputErrorVideoIdAction = (text) => {
+  return {
+    type: 'ERROR_INPUT_VIDEO_ID',
+    text: text
+  }
+}
+
+export const inputErrorSongAction = (text) => {
+  return {
+    type: 'ERROR_INPUT_SONG',
+    text: text
+  }
+}
+
+export const inputErrorSingerAction = (text) => {
+  return {
+    type: 'ERROR_INPUT_SINGER',
+    text: text
   }
 }
