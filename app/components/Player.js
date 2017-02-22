@@ -28,8 +28,8 @@ class Player extends React.Component {
   }
   render() {
     const opts = {
-      height: '0',
-      width: '0',
+      height: '150',
+      width: '150',
       playerVars: { // https://developers.google.com/youtube/player_parameters
         autoplay: 1
       }
@@ -76,7 +76,7 @@ class Player extends React.Component {
         <div className='infoPanel'>
           <div className='songInfo'>
             <div className='songNamePanel'>
-              <div className='songNameText'>{this.props.songName} - {this.props.singerName}</div>
+              <div className='songNameText'>{this.props.song.Name} - {this.props.song.Singer}</div>
             </div>
             <div className='songSliderPanel'>
               <Slider
@@ -99,7 +99,7 @@ class Player extends React.Component {
         <div className='youtubeDebug'>
           <YouTube
             opts={opts}
-            videoId={this.props.videoId}
+            videoId={this.props.song.VideoId}
             onReady={this.props.onReady}
             onStateChange={this.props.onStateChange}
           />

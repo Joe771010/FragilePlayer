@@ -96,13 +96,14 @@ class PlayerContainer extends React.Component {
   render() {
     return (
       <Player
-        videoId = {this.props.videoId}
+        song = {this.props.song}
+
         youtubeState = {this.props.youtubeState}
         duration = {this.props.duration}
         time = {this.props.time}
         playMode = {this.props.playMode}
-        songName = {this.props.songName}
-        singerName = {this.props.singerName}
+
+        
         onReady = {(event) => this._onYoutubeSet(event)}
         onPlayClick = {() => this._onPlayClick()}
         onPreviousClick = {this.props.onPreviousClick}
@@ -125,14 +126,15 @@ const mapStateToProps = (state) => {
   let time = state.player.youtube? state.player.youtube.getCurrentTime(): 0;
   return {
     youtube: state.player.youtube,
-    videoId: state.player.videoId,
+    song: state.player.song,
+    // videoId: state.player.videoId,
     youtubeState: state.player.youtubeState,
     duration: duration,
     time: time,
     currentSongIndex: state.player.currentSongIndex,
     playMode: state.player.playMode,
-    songName: state.player.songName,
-    singerName: state.player.singerName
+    // songName: state.player.songName,
+    // singerName: state.player.singerName
   }
 }
 

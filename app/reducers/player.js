@@ -6,7 +6,11 @@ const initialState = () => {
   return {
     // player
     youtube: null,
-    videoId: '',
+    song: {
+      VideoId: '',
+      Name: '',
+      Singer: ''
+    },
     youtubeState: -1,
     currentTime: 0,
     playMode: 1,
@@ -49,7 +53,7 @@ const player = (state = initialState(), action) => {
     case 'CLICK_PLAY':
       if(state.currentSongIndex == -1) {
         return Object.assign({}, state, {
-          videoId: state.playList[0].VideoId,
+          song: state.playList[0],
           currentSongIndex: 0
         })
       } else {
@@ -60,7 +64,7 @@ const player = (state = initialState(), action) => {
         return state;
       } else {
         return Object.assign({}, state, {
-          videoId: state.playList[state.currentSongIndex+1].VideoId,
+          song: state.playList[state.currentSongIndex+1],
           currentSongIndex: state.currentSongIndex+1
         })
       }
@@ -69,7 +73,7 @@ const player = (state = initialState(), action) => {
         return state;
       } else {
         return Object.assign({}, state, {
-          videoId: state.playList[state.currentSongIndex-1].VideoId,
+          song: state.playList[state.currentSongIndex-1],
           currentSongIndex: state.currentSongIndex-1
         })
       }
@@ -96,17 +100,15 @@ const player = (state = initialState(), action) => {
           let nextSongIndex = getNextSongIndex(state.playMode, state.currentSongIndex, state.playList.length);
           return Object.assign({}, state, {
             youtubeState: action.youtubeState,
-            videoId: state.playList[nextSongIndex].VideoId,
-            songName: state.playList[nextSongIndex].Name,
-            singerName: state.playList[nextSongIndex].Singer,
+            song: state.playList[nextSongIndex],
             currentSongIndex: nextSongIndex
           })
         }
       } else {
         return Object.assign({}, state, {
           youtubeState: action.youtubeState,
-          songName: state.playList[state.currentSongIndex].Name,
-          singerName: state.playList[state.currentSongIndex].Singer
+          songName: state.song.Name,
+          singerName: state.song.Singer
         })
       }
 
@@ -117,7 +119,7 @@ const player = (state = initialState(), action) => {
       })
     case 'PLAY_FROM_PLAY_LIST':
       return Object.assign({}, state, {
-        videoId: state.playList[action.songIndex].VideoId,
+        song: state.playList[action.songIndex],
         currentSongIndex: action.songIndex
       })
     case 'REMOVE_FROM_PLAY_LIST':
@@ -125,6 +127,11 @@ const player = (state = initialState(), action) => {
       playList2.splice(action.songIndex, 1);
       return Object.assign({}, state, {
         playList: playList2
+      })
+    case 'PLAY_FROM_DATABASE':
+      return Object.assign({}, state, {
+        song: action.song,
+        currentSongIndex: 0
       })
     default:
       return state

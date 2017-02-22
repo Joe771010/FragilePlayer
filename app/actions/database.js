@@ -5,6 +5,13 @@ export const createDatabaseAction = (db) => {
   }
 }
 
+export const editDatabaseAction = (song) => {
+  return {
+    type: 'EDIT_DATABASE',
+    song: song
+  }
+}
+
 export const setSelectedSongsAction = (selectedRow) => {
   return {
     type: 'SET_SELECTED_SONGS',

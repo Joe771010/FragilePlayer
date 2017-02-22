@@ -5,14 +5,7 @@ const initialState = () => {
     displayAddDataArea: false,
     displayDeleteDataDialog: false,
     rowToDelete: -1,
-    addData: {
-      videoId: '',
-      song: '',
-      singer: '',
-      errorTextVideoId: '',
-      errorTextSong: '',
-      errorTextSinger: ''
-    }
+    addData: emptyAddData()
   }
 }
 
@@ -23,6 +16,15 @@ const database = (state = initialState(), action) => {
       return Object.assign({}, state, {
           songs: sorted,
           selected: zeroArray(action.db.length)
+      })
+    case 'EDIT_DATABASE':
+      return Object.assign({}, state, {
+        displayAddDataArea: true,
+        addData: Object.assign({}, state.addData, {
+          videoId: action.song.VideoId,
+          song: action.song.Name,
+          singer: action.song.Singer
+        })
       })
     case 'SET_SELECTED_SONGS':
       let newSelected = state.selected.concat([]);
@@ -76,26 +78,12 @@ const database = (state = initialState(), action) => {
     case 'CLICK_ADD_DATA_OK':
       return Object.assign({}, state, {
         displayAddDataArea: false,
-        addData: {
-          videoId: '',
-          song: '',
-          singer: '',
-          errorTextVideoId: '',
-          errorTextSong: '',
-          errorTextSinger: ''
-        }
+        addData: emptyAddData()
       })
     case 'CLICK_ADD_DATA_CANCEL':
       return Object.assign({}, state, {
         displayAddDataArea: false,
-        addData: {
-          videoId: '',
-          song: '',
-          singer: '',
-          errorTextVideoId: '',
-          errorTextSong: '',
-          errorTextSinger: ''
-        }
+        addData: emptyAddData()
       })
     case 'ERROR_INPUT_VIDEO_ID':
       return Object.assign({}, state, {
@@ -132,6 +120,17 @@ const sortSongs = (songs) => {
     if(a.Singer > b.Singer) return 1;
     return 0;
   })
+}
+
+const emptyAddData = () => {
+  return {
+    videoId: '',
+    song: '',
+    singer: '',
+    errorTextVideoId: '',
+    errorTextSong: '',
+    errorTextSinger: ''
+  }
 }
 
 // allocate an array of size n and value=0

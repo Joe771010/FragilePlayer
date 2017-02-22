@@ -82,3 +82,10 @@ export const removeFromPlayListAction = (songIndex) => {
     songIndex: songIndex
   }
 }
+
+export const playFromDatabaseAction = (song) => {
+  return {
+    type: 'PLAY_FROM_DATABASE',
+    song: song
+  }
+}

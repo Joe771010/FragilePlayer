@@ -6,6 +6,9 @@ import {Table, TableBody, TableHeader, TableHeaderColumn, TableRow, TableRowColu
 import TextField from 'material-ui/TextField';
 import Dialog from 'material-ui/Dialog';
 
+import AddDataDialog from './AddDataDialog'
+import DeleteDataDialog from './DeleteDataDialog'
+
 
 import CheckCircle from 'material-ui/svg-icons/action/check-circle';
 import LocalFlorist from 'material-ui/svg-icons/maps/local-florist';
@@ -13,6 +16,8 @@ import Delete from 'material-ui/svg-icons/action/delete';
 import Done from 'material-ui/svg-icons/action/done';
 import Sort from 'material-ui/svg-icons/content/sort';
 import CropSquare from 'material-ui/svg-icons/image/crop-square';
+import PlayArrow from 'material-ui/svg-icons/av/play-arrow';
+import Edit from 'material-ui/svg-icons/image/edit';
 
 import MainStyles from '../styles/MainStyles.css'
 
@@ -32,9 +37,23 @@ class Database extends React.Component {
               style={DatabaseStyles.icon15}
             />
           </TableRowColumn>
-          <TableRowColumn className='tableColumnSongName' style={DatabaseStyles.tableColumnSongName}>{x.Name}</TableRowColumn>
-          <TableRowColumn className='tableColumnSinger'   style={DatabaseStyles.tableColumnSinger}>{x.Singer}</TableRowColumn>
-          <TableRowColumn className='tableColumnDelete'   style={DatabaseStyles.tableColumnDelete}>
+          <TableRowColumn style={DatabaseStyles.tableColumnSongName}>{x.Name}</TableRowColumn>
+          <TableRowColumn style={DatabaseStyles.tableColumnSinger}>{x.Singer}</TableRowColumn>
+          <TableRowColumn style={DatabaseStyles.tableColumnPlay}>
+            <PlayArrow
+              onClick = {() => this.props.playFromDatabase(x)}
+              hoverColor='pink'
+              style={DatabaseStyles.icon20}
+            />
+          </TableRowColumn>
+          <TableRowColumn style={DatabaseStyles.tableColumnEdit}>
+            <Edit
+              onClick = {() => this.props.editDatabase(x)}
+              hoverColor='pink'
+              style={DatabaseStyles.icon20}
+            />
+          </TableRowColumn>
+          <TableRowColumn style={DatabaseStyles.tableColumnDelete}>
             <Delete
               onClick = {() => this.props.onDataDelete(i)}
               hoverColor='pink'
@@ -60,6 +79,8 @@ class Database extends React.Component {
                 <TableHeaderColumn style={DatabaseStyles.tableColumnSelect}></TableHeaderColumn>
                 <TableHeaderColumn style={DatabaseStyles.tableColumnSongName}>歌曲</TableHeaderColumn>
                 <TableHeaderColumn style={DatabaseStyles.tableColumnSinger}>演唱者</TableHeaderColumn>
+                <TableHeaderColumn style={DatabaseStyles.tableColumnPlay}></TableHeaderColumn>
+                <TableHeaderColumn style={DatabaseStyles.tableColumnEdit}></TableHeaderColumn>
                 <TableHeaderColumn style={DatabaseStyles.tableColumnDelete}></TableHeaderColumn>
               </TableRow>
             </TableHeader>
@@ -89,47 +110,24 @@ class Database extends React.Component {
           >
           </RaisedButton>
         </div>
-        <Dialog
-          open = {this.props.displayAddDataArea}
-          model = {true}
-        >
-          <div>
-            <TextField
-              id = 'video id'
-              hintText='Video Id'
-              errorText = {this.props.addDataValues.errorTextVideoId}
-              onChange={this.props.onAddDataTextVideoIdChange}
-              style={DatabaseStyles.addDataTextField}
-            />
-            <TextField
-              id = 'song'
-              hintText='Song'
-              errorText = {this.props.addDataValues.errorTextSong}
-              onChange={this.props.onAddDataTextSongChange}
-              style={DatabaseStyles.addDataTextField}
-            />
-            <TextField
-              id = 'singer'
-              hintText='Singer'
-              errorText = {this.props.addDataValues.errorTextSinger}
-              onChange={this.props.onAddDataTextSingerChange}
-              style={DatabaseStyles.addDataTextField}
-            />
-            <RaisedButton label='新增' onClick={this.props.onAddDataClickOk} labelStyle={DatabaseStyles.buttonText} style={DatabaseStyles.buttonStyle}/>
-            <RaisedButton label='取消' onClick={this.props.onAddDataClickCancel} labelStyle={DatabaseStyles.buttonText} style={DatabaseStyles.buttonStyle}/>
-            <div style={DatabaseStyles.addDataHint}>{'( Video Id為youtube歌曲網址最後面的11碼 )'}</div>
-          </div>
-        </Dialog>
-        <Dialog
-          open = {this.props.displayDeleteDataDialog}
-          model = {true}
-        >
-          <div>
-            <text style={DatabaseStyles.deleteText}>確定刪除歌曲?</text>
-            <RaisedButton label='確定' onClick={this.props.onDataDeleteClickOk} labelStyle={DatabaseStyles.buttonText} style={DatabaseStyles.buttonStyle}/>
-            <RaisedButton label='取消' onClick={this.props.onDataDeleteClickCancel} labelStyle={DatabaseStyles.buttonText} style={DatabaseStyles.buttonStyle}/>
-          </div>
-        </Dialog>
+
+        <AddDataDialog
+          displayAddDataArea = {this.props.displayAddDataArea}
+          addDataValues = {this.props.addDataValues}
+          onAddDataTextVideoIdChange = {this.props.onAddDataTextVideoIdChange}
+          onAddDataTextSongChange = {this.props.onAddDataTextSongChange}
+          onAddDataTextSingerChange = {this.props.onAddDataTextSingerChange}
+          onAddDataClickOk = {this.props.onAddDataClickOk}
+          onAddDataClickCancel = {this.props.onAddDataClickCancel}
+        />
+
+        <DeleteDataDialog
+          displayDeleteDataDialog = {this.props.displayDeleteDataDialog}
+          onDataDeleteClickOk = {this.props.onDataDeleteClickOk}
+          onDataDeleteClickCancel = {this.props.onDataDeleteClickCancel}
+        />
+
+
       </div>
     )
   }

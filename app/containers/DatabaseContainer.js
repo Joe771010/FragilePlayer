@@ -5,6 +5,7 @@ import Database from '../components/Database'
 
 import {
   createDatabaseAction,
+  editDatabaseAction,
   setSelectedSongsAction,
   onDataDeleteAction,
   onDataDeleteClickOkAction,
@@ -20,7 +21,7 @@ import {
   inputErrorSingerAction
 } from '../actions/database'
 
-import {addSongsToPlayListAction} from '../actions/player'
+import {addSongsToPlayListAction, playFromDatabaseAction} from '../actions/player'
 
 // firebase
 import firebase from 'firebase'
@@ -77,6 +78,8 @@ class DatabseContainer extends React.Component {
       <Database
         songs = {this.props.songs}
         selectedRows = {this.props.selectedRows}
+        playFromDatabase = {this.props.playFromDatabase}
+        editDatabase = {this.props.editDatabase}
         onRowSelect = {this.props.onRowSelect}
         onDataDelete = {this.props.onDataDelete}
         onDataDeleteClickOk = {() => this._onDeleteDataClickOk()}
@@ -112,8 +115,17 @@ const mapDispatchToProps = (dispatch) => {
     onDatabaseCreate: (db) => {
       dispatch(createDatabaseAction(db))
     },
+    playFromDatabase: (song) => {
+      dispatch(playFromDatabaseAction(song))
+    },
+    editDatabase: (song) => {
+      dispatch(editDatabaseAction(song))
+    },
     onRowSelect: (row) => {
       dispatch(setSelectedSongsAction(row))
+    },
+    addSongsToPlayList: (songs, selectedRows) => {
+      dispatch(addSongsToPlayListAction(songs, selectedRows))
     },
     onDataDelete: (row) => {
       dispatch(onDataDeleteAction(row))
@@ -123,9 +135,6 @@ const mapDispatchToProps = (dispatch) => {
     },
     onDataDeleteClickCancel: () => {
       dispatch(onDataDeleteClickCancelAction())
-    },
-    addSongsToPlayList: (songs, selectedRows) => {
-      dispatch(addSongsToPlayListAction(songs, selectedRows))
     },
     onDisplayAddData: () => {
       dispatch(displayAddDataAreaAction())
@@ -153,7 +162,7 @@ const mapDispatchToProps = (dispatch) => {
     },
     inputErrorSinger: (text) => {
       dispatch(inputErrorSingerAction(text))
-    }
+    },
   }
 }
 
