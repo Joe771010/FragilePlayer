@@ -8,6 +8,7 @@ import Dialog from 'material-ui/Dialog';
 
 import AddDataDialog from './AddDataDialog'
 import DeleteDataDialog from './DeleteDataDialog'
+import SignOutDialog from './SignOutDialog'
 
 
 import CheckCircle from 'material-ui/svg-icons/action/check-circle';
@@ -109,7 +110,21 @@ class Database extends React.Component {
             style={DatabaseStyles.buttonStyle}
           >
           </RaisedButton>
+          <RaisedButton
+            label = {this.props.userId==''? '登入': '登出'}
+            onClick = {this.props.onUserSignClick}
+            labelStyle={DatabaseStyles.buttonText}
+            style={DatabaseStyles.buttonStyle}
+          >
+          </RaisedButton>
         </div>
+
+        <SignOutDialog
+          displaySignOutDialog = {this.props.displaySignOutDialog}
+          userEmail = {this.props.userEmail}
+          onSignOutClickOk = {this.props.onSignOutClickOk}
+          onSignOutClickCancel = {this.props.onSignOutClickCancel}
+        />
 
         <AddDataDialog
           displayAddDataArea = {this.props.displayAddDataArea}

@@ -1,3 +1,29 @@
+export const onSignInAction = (userId, userEmail) => {
+  return {
+    type: 'USER_SIGN_IN',
+    userId: userId,
+    userEmail: userEmail
+  }
+}
+
+export const onSignOutAction = () => {
+  return {
+    type: 'USER_SIGN_OUT',
+  }
+}
+
+export const onSignOutClickOkAction = () => {
+  return {
+    type: 'USER_SIGN_OUT_OK',
+  }
+}
+
+export const onSignOutClickCancelAction = () => {
+  return {
+    type: 'USER_SIGN_OUT_CANCEL',
+  }
+}
+
 export const createDatabaseAction = (db) => {
   return {
     type: 'CREATE_DATABASE',

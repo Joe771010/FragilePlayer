@@ -28,8 +28,8 @@ class Player extends React.Component {
   }
   render() {
     const opts = {
-      height: '150',
-      width: '150',
+      height: '0',
+      width: '0',
       playerVars: { // https://developers.google.com/youtube/player_parameters
         autoplay: 1
       }

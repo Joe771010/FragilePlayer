@@ -4,6 +4,10 @@ import {connect} from 'react-redux'
 import Database from '../components/Database'
 
 import {
+  onSignInAction,
+  onSignOutAction,
+  onSignOutClickOkAction,
+  onSignOutClickCancelAction,
   createDatabaseAction,
   editDatabaseAction,
   setSelectedSongsAction,
@@ -28,19 +32,59 @@ import firebase from 'firebase'
 
 class DatabseContainer extends React.Component {
   componentWillMount() {
-    this.firebaseRef = firebase.database().ref()
-    this.firebaseRef.on('value', function(dataSnapShot){
-      let data = [];
-      dataSnapShot.forEach(function(childSnapShot){
-        let p = {
-          VideoId: childSnapShot.key,
-          Name: childSnapShot.val().Name,
-          Singer: childSnapShot.val().Singer
-        }
-        data.push(p);
-      });
-      this.props.onDatabaseCreate(data);
-    }.bind(this));
+    // this.firebaseRef = firebase.database().ref()
+    // this.firebaseRef.on('value', function(dataSnapShot){
+    //   let data = [];
+    //   dataSnapShot.forEach(function(childSnapShot){
+    //     let p = {
+    //       VideoId: childSnapShot.key,
+    //       Name: childSnapShot.val().Name,
+    //       Singer: childSnapShot.val().Singer
+    //     }
+    //     data.push(p);
+    //   });
+    //   this.props.onDatabaseCreate(data);
+    // }.bind(this));
+
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in
+        this.props.onSignInClick(user.uid, user.email)
+        // load songs
+        this.firebaseRef = firebase.database().ref(user.uid)
+        this.firebaseRef.on('value', (dataSnapShot) => {
+          let data = [];
+          dataSnapShot.forEach((childSnapShot) => {
+            let p = {
+              VideoId: childSnapShot.key,
+              Name: childSnapShot.val().Name,
+              Singer: childSnapShot.val().Singer
+            }
+            data.push(p);
+          });
+          this.props.onDatabaseCreate(data);
+        });
+      } else {
+        // No user is signed in.
+        // this.props.onSignOutClick()
+      }
+    });
+  }
+  _onUserSignClick() {
+    if(this.props.userId == '') {
+      // sign in
+      let provider = new firebase.auth.GoogleAuthProvider();
+      firebase.auth().signInWithPopup(provider);
+      // firebase.auth().signInWithPopup(provider).then(function(result) {
+      //   console.log('Sign-in succeeded')
+      // }.bind(this)).catch(function(error) {
+      //   console.log('Sign-in failed')
+      // });
+    } else {
+      // sign out
+      // firebase.auth().signOut();
+      this.props.onSignOutClick();
+    }
   }
   _onAddDataClickOk() {
     // check input
@@ -76,6 +120,11 @@ class DatabseContainer extends React.Component {
   render() {
     return (
       <Database
+        userId = {this.props.userId}
+        userEmail = {this.props.userEmail}
+        onUserSignClick = {() => this._onUserSignClick()}
+        onSignOutClickOk = {this.props.onSignOutClickOk}
+        onSignOutClickCancel = {this.props.onSignOutClickCancel}
         songs = {this.props.songs}
         selectedRows = {this.props.selectedRows}
         playFromDatabase = {this.props.playFromDatabase}
@@ -85,6 +134,7 @@ class DatabseContainer extends React.Component {
         onDataDeleteClickOk = {() => this._onDeleteDataClickOk()}
         onDataDeleteClickCancel = {this.props.onDataDeleteClickCancel}
         addSongsToPlayList = {this.props.addSongsToPlayList}
+        displaySignOutDialog = {this.props.displaySignOutDialog}
         displayAddDataArea = {this.props.displayAddDataArea}
         displayDeleteDataDialog = {this.props.displayDeleteDataDialog}
         onDisplayAddData = {this.props.onDisplayAddData}
@@ -101,8 +151,11 @@ class DatabseContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
+    userId: state.database.userId,
+    userEmail: state.database.userEmail,
     songs: state.database.songs,
     selectedRows: state.database.selected,
+    displaySignOutDialog: state.database.displaySignOutDialog,
     displayAddDataArea: state.database.displayAddDataArea,
     displayDeleteDataDialog: state.database.displayDeleteDataDialog,
     rowToDelete: state.database.rowToDelete,
@@ -112,6 +165,18 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    onSignInClick: (userId, userEmail) => {
+      dispatch(onSignInAction(userId, userEmail))
+    },
+    onSignOutClick: () => {
+      dispatch(onSignOutAction())
+    },
+    onSignOutClickOk: () => {
+      dispatch(onSignOutClickOkAction())
+    },
+    onSignOutClickCancel: () => {
+      dispatch(onSignOutClickCancelAction())
+    },
     onDatabaseCreate: (db) => {
       dispatch(createDatabaseAction(db))
     },

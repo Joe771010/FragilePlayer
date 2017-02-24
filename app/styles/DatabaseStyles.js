@@ -91,6 +91,7 @@ const DatabaseStyles = {
   addDataTextField: {
     width: '20%',
     fontFamily: 'Microsoft JhengHei',
+    marginLeft: '10px'
   },
   addDataHint: {
     fontFamily: 'Microsoft JhengHei',

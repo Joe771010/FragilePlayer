@@ -1,9 +1,12 @@
 const initialState = () => {
   return {
+    userId: '',
+    userEmail: '',
     songs: [{Name:'', Singer:''}],
     selected: [],
     displayAddDataArea: false,
     displayDeleteDataDialog: false,
+    displaySignOutDialog: false,
     rowToDelete: -1,
     addData: emptyAddData()
   }
@@ -11,6 +14,22 @@ const initialState = () => {
 
 const database = (state = initialState(), action) => {
   switch(action.type) {
+    case 'USER_SIGN_IN':
+      console.log('--- sign in: ' + action.userId + '---')
+      return Object.assign({}, state, {
+        userId: action.userId,
+        userEmail: action.userEmail
+      })
+    case 'USER_SIGN_OUT':
+      return Object.assign({}, state, {
+        displaySignOutDialog: true
+      })
+    case 'USER_SIGN_OUT_OK':
+      return initialState()
+    case 'USER_SIGN_OUT_CANCEL':
+      return Object.assign({}, state, {
+        displaySignOutDialog: false
+      })
     case 'CREATE_DATABASE':
       let sorted = sortSongs(action.db)
       return Object.assign({}, state, {
