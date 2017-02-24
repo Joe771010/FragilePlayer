@@ -22,9 +22,9 @@
 }
 
 .playerArea {
-  border-style: solid;
+  /*border-style: solid;
   border-width: thin;
-  border-color: blue;
+  border-color: blue;*/
   width: 1000px;
   height: 150px;
   display: flex;

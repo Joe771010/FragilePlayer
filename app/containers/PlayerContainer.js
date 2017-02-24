@@ -28,6 +28,7 @@ class PlayerContainer extends React.Component {
 
   _onYoutubeSet(event) {
     // api call
+    if(event.target.isMuted) event.target.unMute()
     event.target.setVolume(20);
     event.target.setPlaybackQuality('medium')
     // send action
@@ -59,7 +60,7 @@ class PlayerContainer extends React.Component {
     if(this.props.youtube.isMuted) this.props.youtube.unMute()
     this.props.youtube.setVolume(volume*100);
     // send action
-    this.props.onVolumeChange(event, volume)
+    // this.props.onVolumeChange(event, volume*100)
   }
   _onTimeChange(event, value) {
     // send action (放在api call前面讓介面比較不會lag)
@@ -103,7 +104,7 @@ class PlayerContainer extends React.Component {
         time = {this.props.time}
         playMode = {this.props.playMode}
 
-        
+
         onReady = {(event) => this._onYoutubeSet(event)}
         onPlayClick = {() => this._onPlayClick()}
         onPreviousClick = {this.props.onPreviousClick}
@@ -131,6 +132,7 @@ const mapStateToProps = (state) => {
     youtubeState: state.player.youtubeState,
     duration: duration,
     time: time,
+    volume: state.player.volume,
     currentSongIndex: state.player.currentSongIndex,
     playMode: state.player.playMode,
     // songName: state.player.songName,

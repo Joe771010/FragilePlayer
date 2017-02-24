@@ -1,9 +1,9 @@
 const DatabaseStyles = {
   tableArea: {
     height: '350px',
-    borderStyle: 'solid',
-    borderWidth: 'thin',
-    borderColor: 'blue',
+    // borderStyle: 'solid',
+    // borderWidth: 'thin',
+    // borderColor: 'blue',
   },
   tableStyle: {
 

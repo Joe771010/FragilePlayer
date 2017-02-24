@@ -16,7 +16,7 @@ import MenuItem from 'material-ui/MenuItem';
 import YouTube from 'react-youtube'
 
 import MainStyles from '../styles/MainStyles.css'
-import PlayerStyles from '../styles/PlayerStyles.css'
+import PlayerStyles from '../styles/PlayerStyles.js'
 
 const injectTapEventPlugin = require("react-tap-event-plugin");
 
@@ -40,63 +40,65 @@ class Player extends React.Component {
 
     return (
       <div className='playerArea'>
-        <div className='controlPanel'>
-          <div className='controlButtons'>
+        <div style={PlayerStyles.controlPanel}>
+          <div style={PlayerStyles.controlButtons}>
             <IconButton
-              iconStyle={styles.controlButtonIconStyle}
-              style={styles.controlButtonStyle}
+              iconStyle={PlayerStyles.controlButtonIconStyle}
+              style={PlayerStyles.controlButtonStyle}
               onClick={this.props.onPreviousClick}
             >
               <SkipPrevious />
             </IconButton>
             <IconButton
-              iconStyle={styles.controlButtonIconStyle}
-              style={styles.controlButtonStyle}
+              iconStyle={PlayerStyles.controlButtonIconStyle}
+              style={PlayerStyles.controlButtonStyle}
               onClick={this.props.onPlayClick}
             >
               {playIconButton}
             </IconButton>
             <IconButton
-              iconStyle={styles.controlButtonIconStyle}
-              style={styles.controlButtonStyle}
+              iconStyle={PlayerStyles.controlButtonIconStyle}
+              style={PlayerStyles.controlButtonStyle}
               onClick={this.props.onNextClick}
             >
               <SkipNext />
             </IconButton>
           </div>
-          <div className='volumeSliderPanel'>
+          <div style={PlayerStyles.volumeSliderPanel}>
             <Slider
-              className = 'volumeSlider'
+              style = {PlayerStyles.volumeSlider}
+              min = {0}
+              max = {1}
               defaultValue = {0.2}
               onChange = {this.props.onVolumeChange}
             />
           </div>
         </div>
 
-        <div className='infoPanel'>
-          <div className='songInfo'>
-            <div className='songNamePanel'>
-              <div className='songNameText'>{this.props.song.Name} - {this.props.song.Singer}</div>
+        <div style={PlayerStyles.infoPanel}>
+          <div style={PlayerStyles.songInfo}>
+            <div style={PlayerStyles.songNamePanel}>
+              <div style={PlayerStyles.songNameText}>{this.props.song.Name} - {this.props.song.Singer}</div>
             </div>
-            <div className='songSliderPanel'>
+            <div style={PlayerStyles.songSliderPanel}>
               <Slider
-                className = 'songSlider'
+                style = {PlayerStyles.songSlider}
                 min = {0}
-                max = {this.props.duration + 0.1}
+                max = {this.props.duration==0? 100:this.props.duration}
                 value = {this.props.time}
                 onChange = {this.props.onTimeChange}
               />
             </div>
           </div>
-          <div className='otherInfo'>
-            <DropDownMenu value={this.props.playMode} onChange={this.props.onPlayModeChange} style={styles.playModeItemStyle}>
-              <MenuItem primaryText="依序播放" value={1} style={styles.playModeItemStyle}/>
-              <MenuItem primaryText="單曲循環" value={2} style={styles.playModeItemStyle}/>
-              <MenuItem primaryText="隨機播放" value={3} style={styles.playModeItemStyle}/>
+          <div style={PlayerStyles.otherInfo}>
+            <DropDownMenu value={this.props.playMode} onChange={this.props.onPlayModeChange} style={PlayerStyles.playModeItemStyle}>
+              <MenuItem primaryText="依序播放" value={1} style={PlayerStyles.playModeItemStyle}/>
+              <MenuItem primaryText="單曲循環" value={2} style={PlayerStyles.playModeItemStyle}/>
+              <MenuItem primaryText="隨機播放" value={3} style={PlayerStyles.playModeItemStyle}/>
             </DropDownMenu>
           </div>
         </div>
-        <div className='youtubeDebug'>
+        <div style={PlayerStyles.youtubeDebug}>
           <YouTube
             opts={opts}
             videoId={this.props.song.VideoId}
@@ -106,22 +108,6 @@ class Player extends React.Component {
         </div>
       </div>
     )
-  }
-}
-
-const styles = {
-  controlButtonIconStyle: {
-    width: '36px',
-    height: '36px'
-  },
-  controlButtonStyle: {
-    width: '50px',
-    height: '50px',
-    padding: '7px'
-  },
-  playModeItemStyle: {
-    fontFamily: 'Microsoft JhengHei',
-    fontSize: '14px'
   }
 }
 
