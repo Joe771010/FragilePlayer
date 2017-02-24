@@ -20112,26 +20112,12 @@ var DatabseContainer = function (_React$Component) {
     value: function componentWillMount() {
       var _this2 = this;
 
-      // this.firebaseRef = firebase.database().ref()
-      // this.firebaseRef.on('value', function(dataSnapShot){
-      //   let data = [];
-      //   dataSnapShot.forEach(function(childSnapShot){
-      //     let p = {
-      //       VideoId: childSnapShot.key,
-      //       Name: childSnapShot.val().Name,
-      //       Singer: childSnapShot.val().Singer
-      //     }
-      //     data.push(p);
-      //   });
-      //   this.props.onDatabaseCreate(data);
-      // }.bind(this));
-
       _firebase2.default.auth().onAuthStateChanged(function (user) {
         if (user) {
           // User is signed in
           _this2.props.onSignInClick(user.uid, user.email);
           // load songs
-          _this2.firebaseRef = _firebase2.default.database().ref(user.uid);
+          _this2.firebaseRef = _firebase2.default.database().ref('users/' + user.uid);
           _this2.firebaseRef.on('value', function (dataSnapShot) {
             var data = [];
             dataSnapShot.forEach(function (childSnapShot) {

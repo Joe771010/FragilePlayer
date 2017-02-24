@@ -32,26 +32,12 @@ import firebase from 'firebase'
 
 class DatabseContainer extends React.Component {
   componentWillMount() {
-    // this.firebaseRef = firebase.database().ref()
-    // this.firebaseRef.on('value', function(dataSnapShot){
-    //   let data = [];
-    //   dataSnapShot.forEach(function(childSnapShot){
-    //     let p = {
-    //       VideoId: childSnapShot.key,
-    //       Name: childSnapShot.val().Name,
-    //       Singer: childSnapShot.val().Singer
-    //     }
-    //     data.push(p);
-    //   });
-    //   this.props.onDatabaseCreate(data);
-    // }.bind(this));
-
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         // User is signed in
         this.props.onSignInClick(user.uid, user.email)
         // load songs
-        this.firebaseRef = firebase.database().ref(user.uid)
+        this.firebaseRef = firebase.database().ref('users/' + user.uid)
         this.firebaseRef.on('value', (dataSnapShot) => {
           let data = [];
           dataSnapShot.forEach((childSnapShot) => {
